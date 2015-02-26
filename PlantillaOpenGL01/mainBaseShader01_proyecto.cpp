@@ -29,7 +29,8 @@ cwc::glShader *shader;
 
 GLfloat posLX;
 GLfloat posLZ;
-
+float indexOfRefraction = 0.5;
+float rootMeanSquare = 0.5;
 
 void ejesCoordenada() {
 	
@@ -117,6 +118,27 @@ void Keyboard(unsigned char key, int x, int y)
 
   switch (key)
   {
+	case 1:
+		//Activa specular
+		break;
+	case 2:
+		//Activa el cooktorrance
+		break;
+	case 3:
+		//activa el efecto fresnel SOLO
+		break;
+	case 4:
+		//desactiva el efecto fresnel
+		break;
+	case 'q':
+		//aumenta en 0.15 el indice de refraccion de cook
+		break;
+	case 'w':
+		//disminuye en 0.15 el indice de refraccion de cook
+		break;
+	case 'a':
+		//aumenta en 0.01 m
+		break;
 	case 27:             
 		exit (0);
 		break;
@@ -211,8 +233,8 @@ void render(){
     GLfloat light_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
 	GLfloat light_diffuse[] = { 0.8, 0.8, 0.8, 1.0 };
 	GLfloat light_specular[] = { 0.8, 0.8, 0.8, 1.0 };
-	//GLfloat light_position[] = { posLX, 10.0, posLZ, 1.0 };
-	GLfloat light_position[] = { 10.0, 10.0, 10.0, 1.0 };
+	GLfloat light_position[] = { posLX, 10.0, posLZ, 1.0 };
+	//GLfloat light_position[] = { 10.0, 10.0, 10.0, 1.0 };
 
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
