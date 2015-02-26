@@ -3,6 +3,8 @@ varying vec4 cMatDiff, cMatAmb, cMatSpec;
 varying vec3 camDirection;
 varying vec3 N;
 varying vec4 L;
+uniform float indexOfRefraction;
+uniform float m;
 
 float distro(vec3 Nn, vec3 H, float m){
    float ndoth = dot(Nn,H);
@@ -32,7 +34,6 @@ float fresnel_profe(vec3 normal, vec3 light, float indexOfR){
 float illumCookTorrance(vec3 Nn, vec3 V, float m, vec3 L) {
    //Sera necesario el faceforward?
    float cook = 0;
-   float indexOfRefraction = 0.2;
    vec3 Nnor = normalize(Nn);
    vec3 Ln = normalize(L);
    vec3 eyeDir = normalize(Ln+V);
@@ -53,7 +54,7 @@ void main (void)
    float iDiff, iSpec;
    vec3 vRef;
    //Componente Especular torrance-cook
-   float iSpecCook = illumCookTorrance(N,camDirection,0.6,L.xyz);
+   float iSpecCook = illumCookTorrance(N,camDirection,m,L.xyz);
    //Componente Specular Phong
    /*vRef = -normalize(reflect(L.xyz,N));
    iSpec = pow(max(dot(vRef, normalize(camDirection)), 0.0),10.0);*/

@@ -132,9 +132,11 @@ void Keyboard(unsigned char key, int x, int y)
 		break;
 	case 'q':
 		//aumenta en 0.15 el indice de refraccion de cook
+		indexOfRefraction += 0.15;
 		break;
 	case 'w':
 		//disminuye en 0.15 el indice de refraccion de cook
+		indexOfRefraction -= 0.15;
 		break;
 	case 'a':
 		//aumenta en 0.01 m
@@ -249,8 +251,21 @@ void render(){
 	
 	glPushMatrix();
 
+
 	if (shader) shader->begin();
 
+	//shader -> BindAttribLocation((GLint)20, "indexOfRefraction");
+	GLint programObj = shader->GetProgramObject();
+	cout << "This is the program object: " << programObj << endl;
+	GLint indexRLocation = shader->GetUniformLocation("indexOfRefraction");
+	cout << "Location of index of refraction: " << indexRLocation << endl;
+	if(shader->setUniform1f(0, indexOfRefraction, indexRLocation)) cout << "DID IT" << endl;
+	else cout << "You loser" << endl;
+
+	GLint mLocation = shader->GetUniformLocation("m");
+	cout << "Location of m: " << mLocation << endl;
+	if(shader->setUniform1f(0, rootMeanSquare, mLocation)) cout << "DID IT for m too" << endl;
+	else cout << "You loser for m too" << endl;
 
 	// COdigo para el mesh
 	glEnable(GL_NORMALIZE);

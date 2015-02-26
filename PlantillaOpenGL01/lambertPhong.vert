@@ -3,6 +3,8 @@ varying vec4 cMatDiff, cMatAmb, cMatSpec;
 varying vec3 camDirection;
 varying vec3 N;
 varying vec4 L;
+uniform float indexOfRefraction;
+uniform float m;
 
 void main(void)
 {
@@ -23,6 +25,5 @@ void main(void)
 	cMatSpec = gl_FrontMaterial.specular;
 
 	camDirection = -V.xyz;
-
    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
 }
