@@ -29,8 +29,8 @@ cwc::glShader *shader;
 
 GLfloat posLX;
 GLfloat posLZ;
-float indexOfRefraction = 1.5;
-float rootMeanSquare = 0.5, kfr = 2.60, eta = 0.0, bias = 0.70;
+float indexOfRefraction = 5.5;
+float rootMeanSquare = 0.130, kfr = 2.60, eta = 0.0, bias = 0.70;
 bool typeSpec = true;
 bool fresnel = false;
 float intensidadSpecular = 1.0, intensidadDiffuse = 1.0; 
