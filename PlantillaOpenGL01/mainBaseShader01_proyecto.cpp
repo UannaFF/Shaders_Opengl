@@ -29,8 +29,11 @@ cwc::glShader *shader;
 
 GLfloat posLX;
 GLfloat posLZ;
-float indexOfRefraction = 0.5;
-float rootMeanSquare = 0.5;
+float indexOfRefraction = 1.5;
+float rootMeanSquare = 0.5, kfr = 2.60, eta = 0.0, bias = 0.70;
+bool typeSpec = true;
+bool fresnel = false;
+float intensidadSpecular = 1.0, intensidadDiffuse = 1.0; 
 
 void ejesCoordenada() {
 	
@@ -118,28 +121,72 @@ void Keyboard(unsigned char key, int x, int y)
 
   switch (key)
   {
-	case 1:
+	case '1':
 		//Activa specular
 		break;
-	case 2:
+	case '2':
 		//Activa el cooktorrance
+		typeSpec = !typeSpec;
 		break;
-	case 3:
+	case '3':
 		//activa el efecto fresnel SOLO
+		fresnel = true;
 		break;
-	case 4:
+	case '4':
 		//desactiva el efecto fresnel
+		fresnel = false;
 		break;
 	case 'q':
 		//aumenta en 0.15 el indice de refraccion de cook
+		cout << "Entro para aumentar" << endl;
 		indexOfRefraction += 0.15;
 		break;
 	case 'w':
 		//disminuye en 0.15 el indice de refraccion de cook
 		indexOfRefraction -= 0.15;
+		if(indexOfRefraction < 1) indexOfRefraction = 1.0;
 		break;
 	case 'a':
 		//aumenta en 0.01 m
+		rootMeanSquare += 0.01;
+		break;
+	case 'm':
+		rootMeanSquare -= 0.01;
+		if(rootMeanSquare < 0.0) rootMeanSquare = 0.0;
+		break;
+	case 'u':
+		eta += 0.02;
+		break;
+	case 'i':
+		eta -= 0.02;
+		if(eta < 0) eta = 0;
+		break;
+	case 'j':
+		kfr += 0.1;
+		break;
+	case 'k':
+		kfr -= 0.1;
+		if(kfr < 0.0) kfr = 0;
+		break;
+	case 'z':
+		bias += 0.1;
+		break;
+	case 'x':
+		bias -= 0.1;
+		break;
+	case 'c':
+		intensidadSpecular += 0.1;
+		break;
+	case 'v':
+		intensidadSpecular -= 0.1;
+		if(intensidadSpecular < 0.0) intensidadSpecular = 0.0;
+		break;
+	case 'b':
+		intensidadDiffuse += 0.1;
+		break;
+	case 'n':
+		intensidadDiffuse -= 0.1;
+		if(intensidadDiffuse < 0.0) intensidadDiffuse = 0.0;
 		break;
 	case 27:             
 		exit (0);
@@ -254,18 +301,36 @@ void render(){
 
 	if (shader) shader->begin();
 
-	//shader -> BindAttribLocation((GLint)20, "indexOfRefraction");
+	cout << "Entro para poner el valor de intensidadDiffusa: " << intensidadDiffuse << endl;
+	cout << "Entro para poner el valor de intensidadSpecular: " << intensidadSpecular << endl;
+	//Pasando los valores de las variables al shader
 	GLint programObj = shader->GetProgramObject();
-	cout << "This is the program object: " << programObj << endl;
 	GLint indexRLocation = shader->GetUniformLocation("indexOfRefraction");
-	cout << "Location of index of refraction: " << indexRLocation << endl;
-	if(shader->setUniform1f(0, indexOfRefraction, indexRLocation)) cout << "DID IT" << endl;
-	else cout << "You loser" << endl;
+	shader->setUniform1f(0, indexOfRefraction, indexRLocation);
 
 	GLint mLocation = shader->GetUniformLocation("m");
-	cout << "Location of m: " << mLocation << endl;
-	if(shader->setUniform1f(0, rootMeanSquare, mLocation)) cout << "DID IT for m too" << endl;
-	else cout << "You loser for m too" << endl;
+	shader->setUniform1f(0, rootMeanSquare, mLocation);
+
+	mLocation = shader->GetUniformLocation("typeSpec");
+	shader->setUniform1f(0, typeSpec, mLocation);
+
+	mLocation = shader->GetUniformLocation("fresnel");
+	shader->setUniform1f(0, fresnel, mLocation);
+
+	mLocation = shader->GetUniformLocation("bias");
+	shader->setUniform1f(0, bias, mLocation);
+
+	mLocation = shader->GetUniformLocation("eta");
+	shader->setUniform1f(0, eta, mLocation);
+
+	mLocation = shader->GetUniformLocation("kfr");
+	shader->setUniform1f(0, kfr, mLocation);
+
+	mLocation = shader->GetUniformLocation("intensidadDiffuse");
+	shader->setUniform1f(0, intensidadDiffuse, mLocation);
+
+	mLocation = shader->GetUniformLocation("intensidadSpecular");
+	shader->setUniform1f(0, intensidadSpecular, mLocation);
 
 	// COdigo para el mesh
 	glEnable(GL_NORMALIZE);
@@ -372,7 +437,7 @@ int main (int argc, char** argv) {
 
 	glutInitWindowSize(960,540);
 
-	glutCreateWindow("Test Opengl");
+	glutCreateWindow("Dragon Shaders");
 
 
 	// Codigo para cargar la geometria usando ASSIMP

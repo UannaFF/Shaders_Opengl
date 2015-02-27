@@ -5,6 +5,11 @@ varying vec3 N;
 varying vec4 L;
 uniform float indexOfRefraction;
 uniform float m;
+uniform bool typeSpec;
+uniform bool fresnel;
+uniform float bias;
+uniform float eta;
+uniform float kfr;
 
 void main(void)
 {
