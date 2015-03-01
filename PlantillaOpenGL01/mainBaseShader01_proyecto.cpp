@@ -34,6 +34,7 @@ float rootMeanSquare = 0.130, kfr = 2.6, eta = 0.0, bias = 0.70;
 bool typeSpec = true;
 bool fresnel = false;
 float intensidadSpecular = 1.0, intensidadDiffuse = 1.0; 
+float kMinne = 0.0;
 
 void ejesCoordenada() {
 	
@@ -170,7 +171,13 @@ void Keyboard(unsigned char key, int x, int y)
 		break;
 	case 'x':
 		bias -= 0.1;
-		break;
+	break;	
+	case 't':
+		kMinne += 0.1;
+	break;
+	case 'y':
+		kMinne -= 0.1;
+	break;
 	case 'c':
 		intensidadSpecular += 0.1;
 		break;
@@ -188,7 +195,6 @@ void Keyboard(unsigned char key, int x, int y)
 	case 27:             
 		exit (0);
 		break;
-
   }
 
   glutPostRedisplay();

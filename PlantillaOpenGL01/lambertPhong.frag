@@ -12,6 +12,7 @@ uniform float eta;
 uniform float kfr;
 uniform float intensidadSpecular;
 uniform float intensidadDiffuse;
+uniform float kMinne;
 
 float distro(vec3 Nn, vec3 H, float m){
    float ndoth = dot(Nn,H);
@@ -94,7 +95,7 @@ void main (void){
       //Componente Specular Phong
       //vRef = -normalize(reflect(L.xyz,N));
       //iSpec = pow(max(dot(vRef, Vn), 0.0),10.0);
-	  iSpec = MinnaertFunc(-1.0,Nn,Vn,Ln);
+	  iSpec = MinnaertFunc(kMinne,Nn,Vn,Ln);
    }
 
    //Componente difuso.
