@@ -95,7 +95,7 @@ void main (void){
       //Componente Specular Phong
       //vRef = -normalize(reflect(L.xyz,N));
       //iSpec = pow(max(dot(vRef, Vn), 0.0),10.0);
-	  iSpec = MinnaertFunc(1.0,Nn,Vn,Ln);
+	  iSpec = MinnaertFunc(-1.0,Nn,Vn,Ln);
    }
 
    //Componente difuso.
