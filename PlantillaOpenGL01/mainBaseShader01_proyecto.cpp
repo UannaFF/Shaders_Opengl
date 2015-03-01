@@ -323,9 +323,12 @@ void render(){
 
 	mLocation = shader->GetUniformLocation("eta");
 	shader->setUniform1f(0, eta, mLocation);
-
+	
 	mLocation = shader->GetUniformLocation("kfr");
 	shader->setUniform1f(0, kfr, mLocation);
+
+	mLocation = shader->GetUniformLocation("kMinne");
+	shader->setUniform1f(0, kMinne, mLocation);
 
 	mLocation = shader->GetUniformLocation("intensidadDiffuse");
 	shader->setUniform1f(0, intensidadDiffuse, mLocation);
