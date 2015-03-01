@@ -30,7 +30,8 @@ GLfloat posLX;
 GLfloat posLZ;
 float indexOfRefraction = 5.5;
 float rootMeanSquare = 0.130, kfr = 2.6, eta = 0.0, bias = 0.70;
-bool typeSpec = true;
+bool MinnaSpec = false;
+bool CookSpec = false;
 bool fresnel = false;
 float intensidadSpecular = 1.0, intensidadDiffuse = 1.0; 
 float kMinne = 0.0;
@@ -119,11 +120,11 @@ void Keyboard(unsigned char key, int x, int y)
   {
 	case '1':
 		//Activa specular
-		typeSpec = 0;
+		CookSpec = !CookSpec;
 		break;
 	case '2':
 		//Activa el cooktorrance
-		typeSpec = 1;
+		MinnaSpec = !MinnaSpec;
 		break;
 	case '3':
 		//activa el efecto fresnel SOLO
@@ -311,9 +312,12 @@ void render(){
 
 	GLint mLocation = shader->GetUniformLocation("m");
 	shader->setUniform1f(0, rootMeanSquare, mLocation);
+	
+	mLocation = shader->GetUniformLocation("CookSpec");
+	shader->setUniform1f(0, CookSpec, mLocation);
 
-	mLocation = shader->GetUniformLocation("typeSpec");
-	shader->setUniform1f(0, typeSpec, mLocation);
+	mLocation = shader->GetUniformLocation("MinnaSpec");
+	shader->setUniform1f(0, MinnaSpec, mLocation);
 
 	mLocation = shader->GetUniformLocation("fresnel");
 	shader->setUniform1f(0, fresnel, mLocation);

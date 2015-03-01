@@ -5,14 +5,15 @@ varying vec3 N;
 varying vec4 L;
 uniform float indexOfRefraction;
 uniform float m;
-uniform bool typeSpec;
+uniform bool MinnaSpec;
+uniform bool CookSpec;
 uniform bool fresnel;
 uniform float bias;
 uniform float eta;
 uniform float kfr;
 uniform float intensidadSpecular;
 uniform float intensidadDiffuse;
-uniform float kMinne = 0.0;
+uniform float kMinne;
 
 float distro(vec3 Nn, vec3 H, float m){
    float ndoth = dot(Nn,H);
@@ -84,14 +85,15 @@ void main (void){
    
    vec4 cFinal = vec4(0.0,0.0,0.0,1.0);
    float iDiff, iSpec;
+   iSpec = 0.0;
    vec3 vRef;
    vec3 Nn = normalize(N);
    vec3 Ln = normalize(L.xyz);
    vec3 Vn = normalize(camDirection);
    //Componente Especular torrance-cook
-   if(typeSpec) {
+   if(CookSpec) {
       iSpec = illumCookTorrance(Nn,Vn,m,Ln);
-   } else {
+   } else if(MinnaSpec) {
       //Componente Specular Phong
       //vRef = -normalize(reflect(L.xyz,N));
       //iSpec = pow(max(dot(vRef, Vn), 0.0),10.0);
