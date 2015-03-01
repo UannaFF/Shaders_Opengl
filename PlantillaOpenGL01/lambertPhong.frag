@@ -69,17 +69,14 @@ vec4 fresnelShlickFunc(float bias, float eta, float kfr, vec3 Nn, vec3 Vn) {
 }
 
 float SeeligerFunc(vec3 Nn, vec3 Vn, vec3 Ln){
+   vec4 color;
+   //Vn = -Vn;
    float c = max(0.0,max(dot(Nn,Ln),0.0)/(max(0.0,dot(Nn,Ln))+max(0.0, dot(Nn,Vn))));
    return c;
 }
 
-float MinnaertFunc(float k, vec3 Nn, vec3 Vn, vec3 Ln){
-	float ndotv = max(0.0, dot(Nn, Vn));
-	float ndotl = max(0.0, dot(Ln, Nn));
-	return pow(ndotl*ndotv, 1-k);
-}
-
-void main (void){     
+void main (void)  
+{     
    
    vec4 cFinal = vec4(0.0,0.0,0.0,1.0);
    float iDiff, iSpec;
@@ -92,9 +89,8 @@ void main (void){
       iSpec = illumCookTorrance(Nn,Vn,m,Ln);
    } else {
       //Componente Specular Phong
-      //vRef = -normalize(reflect(L.xyz,N));
-      //iSpec = pow(max(dot(vRef, Vn), 0.0),10.0);
-	  iSpec = MinnaertFunc(1.0,Nn,Vn,Ln);
+      vRef = -normalize(reflect(L.xyz,N));
+      iSpec = pow(max(dot(vRef, Vn), 0.0),10.0);
    }
 
    //Componente difuso.

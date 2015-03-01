@@ -1,11 +1,10 @@
-Info,  T12736: Load dragon_vrip_res2.ply
-Info,  T12736: Found a matching importer for this file format
-Info,  T12736: Import root directory is '.\'
-Info,  T12736: Entering post processing pipeline
-Info,  T12736: Points: 0, Lines: 0, Triangles: 1, Polygons: 0 (Meshes, X = removed)
-Info,  T12736: GenVertexNormalsProcess finished. Vertex normals have been calculated
-Error, T12736: Failed to compute tangents; need UV data in channel0
-Info,  T12736: JoinVerticesProcess finished | Verts in: 607560 out: 100207 | ~83.5%
-Info,  T12736: Cache relevant are 1 meshes (202520 faces). Average output ACMR is 0.745512
-Info,  T12736: Leaving post processing pipeline
-
+Info,  T2816: Load dragon_vrip_res2.ply
+Info,  T2816: Found a matching importer for this file format
+Info,  T2816: Import root directory is '.\'
+Info,  T2816: Entering post processing pipeline
+Info,  T2816: Points: 0, Lines: 0, Triangles: 1, Polygons: 0 (Meshes, X = removed)
+Info,  T2816: GenVertexNormalsProcess finished. Vertex normals have been calculated
+Error, T2816: Failed to compute tangents; need UV data in channel0
+Info,  T2816: JoinVerticesProcess finished | Verts in: 607560 out: 100207 | ~83.5%
+Info,  T2816: Cache relevant are 1 meshes (202520 faces). Average output ACMR is 0.745512
+Info,  T2816: Leaving post processing pipeline
