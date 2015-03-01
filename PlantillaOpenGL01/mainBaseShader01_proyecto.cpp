@@ -21,7 +21,6 @@ aiVector3D scene_min, scene_max, scene_center;
 #define aisgl_min(x,y) (x<y?x:y)
 #define aisgl_max(x,y) (y>x?y:x)
 
-
 using namespace std;
 
 cwc::glShaderManager SM;
@@ -34,6 +33,7 @@ float rootMeanSquare = 0.130, kfr = 2.6, eta = 0.0, bias = 0.70;
 bool typeSpec = true;
 bool fresnel = false;
 float intensidadSpecular = 1.0, intensidadDiffuse = 1.0; 
+float kMinne = 0.0;
 
 void ejesCoordenada() {
 	
@@ -170,7 +170,13 @@ void Keyboard(unsigned char key, int x, int y)
 		break;
 	case 'x':
 		bias -= 0.1;
-		break;
+	break;	
+	case 't':
+		kMinne += 0.1;
+	break;
+	case 'y':
+		kMinne -= 0.1;
+	break;
 	case 'c':
 		intensidadSpecular += 0.1;
 		break;
@@ -188,7 +194,6 @@ void Keyboard(unsigned char key, int x, int y)
 	case 27:             
 		exit (0);
 		break;
-
   }
 
   glutPostRedisplay();
@@ -318,9 +323,12 @@ void render(){
 
 	mLocation = shader->GetUniformLocation("eta");
 	shader->setUniform1f(0, eta, mLocation);
-
+	
 	mLocation = shader->GetUniformLocation("kfr");
 	shader->setUniform1f(0, kfr, mLocation);
+
+	mLocation = shader->GetUniformLocation("kMinne");
+	shader->setUniform1f(0, kMinne, mLocation);
 
 	mLocation = shader->GetUniformLocation("intensidadDiffuse");
 	shader->setUniform1f(0, intensidadDiffuse, mLocation);
