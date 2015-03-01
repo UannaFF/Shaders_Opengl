@@ -21,7 +21,6 @@ aiVector3D scene_min, scene_max, scene_center;
 #define aisgl_min(x,y) (x<y?x:y)
 #define aisgl_max(x,y) (y>x?y:x)
 
-
 using namespace std;
 
 cwc::glShaderManager SM;

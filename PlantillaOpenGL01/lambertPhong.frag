@@ -12,7 +12,7 @@ uniform float eta;
 uniform float kfr;
 uniform float intensidadSpecular;
 uniform float intensidadDiffuse;
-uniform float kMinne;
+float kMinne = 0.0;
 
 float distro(vec3 Nn, vec3 H, float m){
    float ndoth = dot(Nn,H);
