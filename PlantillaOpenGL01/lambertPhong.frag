@@ -39,7 +39,6 @@ float fresnel_profe(vec3 normal, vec3 light, float indexOfR){
 }
 
 float illumCookTorrance(vec3 Nn, vec3 V, float m, vec3 L) {
-   //Sera necesario el faceforward?
    float cook = 0;
    vec3 eyeDir = normalize(L+V);
    float D = distro(Nn, eyeDir, m);
@@ -62,9 +61,9 @@ vec4 fresnelShlickFunc(float bias, float eta, float kfr, vec3 Nn, vec3 Vn) {
    float kr = eta + (1-eta)*pow(1-dotnv,5);
    kr = kfr*biasFunc(kr,bias);
    vec4 res;
-   res.x = kr;
+   res.x = kr*2.0;
    res.y = kr;
-   res.z = kr;
+   res.z = kr*2.0;
    res.w = kr;
    return res;
 }

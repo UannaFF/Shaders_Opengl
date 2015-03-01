@@ -8,3 +8,4 @@ Error, T12736: Failed to compute tangents; need UV data in channel0
 Info,  T12736: JoinVerticesProcess finished | Verts in: 607560 out: 100207 | ~83.5%
 Info,  T12736: Cache relevant are 1 meshes (202520 faces). Average output ACMR is 0.745512
 Info,  T12736: Leaving post processing pipeline
+
