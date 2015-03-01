@@ -81,8 +81,6 @@ void changeViewport(int w, int h) {
 
 	if (h==0)
 		h=1;
-
-	
    glViewport (0, 0, (GLsizei) w, (GLsizei) h); 
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
@@ -110,14 +108,12 @@ void init(){
 	posLX = 10.0;
 	posLZ = 10.0;
 
-
 }
 
 
 
 void Keyboard(unsigned char key, int x, int y)
 {
-
 
   switch (key)
   {
@@ -193,7 +189,6 @@ void Keyboard(unsigned char key, int x, int y)
 		break;
 
   }
-  
 
   glutPostRedisplay();
 }
@@ -347,20 +342,14 @@ void render(){
 	    glEndList();
 	}
 	glCallList(scene_list);
-	
 	glPopMatrix();
-	
 	
 	glPushMatrix();
 	glTranslatef(5.2, 3.25, 0.0);
 	glutSolidSphere(0.4f,30,30);
 	glPopMatrix();
-	 
 
 	if (shader) shader->end();
-
-	
-	
 
 	glDisable(GL_BLEND);
 	glDisable(GL_LINE_SMOOTH);
@@ -439,7 +428,6 @@ int main (int argc, char** argv) {
 
 	glutCreateWindow("Dragon Shaders");
 
-
 	// Codigo para cargar la geometria usando ASSIMP
 
 	aiLogStream stream;
@@ -463,9 +451,6 @@ int main (int argc, char** argv) {
 			return -1;
 		}
 	}
-
-
-
 
 	init ();
 
