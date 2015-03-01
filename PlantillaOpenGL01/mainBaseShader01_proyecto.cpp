@@ -119,10 +119,11 @@ void Keyboard(unsigned char key, int x, int y)
   {
 	case '1':
 		//Activa specular
+		typeSpec = 0;
 		break;
 	case '2':
 		//Activa el cooktorrance
-		typeSpec = !typeSpec;
+		typeSpec = 1;
 		break;
 	case '3':
 		//activa el efecto fresnel SOLO

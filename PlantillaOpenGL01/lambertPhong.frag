@@ -88,9 +88,7 @@ void main (void)
    if(typeSpec) {
       iSpec = illumCookTorrance(Nn,Vn,m,Ln);
    } else {
-      //Componente Specular Phong
-      vRef = -normalize(reflect(L.xyz,N));
-      iSpec = pow(max(dot(vRef, Vn), 0.0),10.0);
+	  iSpec = MinnaertFunc(-1.0,Nn,Vn,Ln);
    }
 
    //Componente difuso.
