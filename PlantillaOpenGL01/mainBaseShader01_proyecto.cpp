@@ -102,7 +102,7 @@ void init(){
    glEnable(GL_LIGHT0);
    glEnable(GL_DEPTH_TEST);
    
-   shader = SM.loadfromFile("lambertPhong.vert","lambertPhong.frag"); // load (and compile, link) from file
+   shader = SM.loadfromFile("customShader.vert","customShader.frag"); // load (and compile, link) from file
    	  if (shader==0) 
 			  std::cout << "Error Loading, compiling or linking shader\n";
 
